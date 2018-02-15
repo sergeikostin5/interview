@@ -1,67 +1,40 @@
 package arrays;
 
-import java.util.ArrayDeque;
+import java.util.*;
 
 /**
  * https://leetcode.com/problems/sliding-window-maximum/description/
  */
 public class SlidingWindowMaximum {
 
-    public static void find_max_sliding_window(
-            int[] array,
-            int window_size) {
-
-        if(array.length < window_size) {
-            return;
+    public static int[] windowMax(int [] array, int width) {
+        Deque<Integer> doubleQueue = new LinkedList<Integer>();
+        //calculate the first window max
+        int [] maxArray = new int[array.length - width + 1];
+        for (int i = 0; i < width; i++) {
+            while(!doubleQueue.isEmpty() && array[i] > doubleQueue.peekLast())
+                doubleQueue.removeLast();
+            doubleQueue.push(array[i]);
         }
-
-        ArrayDeque<Integer> window = new ArrayDeque<Integer>();
-
-        //find out max for the first window
-        for(int i=0 ; i<window_size ; i++) {
-
-            while(!window.isEmpty()
-                    && array[i] >= array[window.peekLast()] ) {
-                window.removeLast();
-            }
-
-            window.addLast(i);
+        maxArray[0] = doubleQueue.peekFirst();
+        //then try to move the window right and pop
+        for (int i = width; i < array.length; i++) {
+            if (doubleQueue.size() == width) // if full, remove the first max element
+                doubleQueue.removeFirst();
+            while(!doubleQueue.isEmpty() && array[i] > doubleQueue.peekLast())
+                doubleQueue.removeLast();
+            doubleQueue.addLast(array[i]);
+            maxArray[i-width+1] = doubleQueue.peekFirst(); // first element will be the max;
         }
-
-        System.out.print(array[window.peekFirst()] + ", ");
-
-
-        for(int i= window_size; i<array.length; i++) {
-
-            //remove all numbers that are smaller than current number
-            //from the tail of queue
-            while(!window.isEmpty()
-                    && array[i] >= array[window.peekLast()]) {
-                window.removeLast();
-            }
-
-            //remove first number if it doesn't fall in the window anymore
-            if(!window.isEmpty()
-                    && window.peekFirst() <= i - window_size) {
-                window.removeFirst();
-            }
-
-            window.addLast(i);
-
-            System.out.print(array[window.peekFirst()] + ", ");
-        }
-
+        return maxArray;
     }
 
     public static void main(String[] args) {
-        int[] arr = {-4,2,-5,1,-1,6};
-        find_max_sliding_window(arr, 3);
-        ArrayDeque<Integer> nums = new ArrayDeque<>();
-        nums.addFirst(5);
-        nums.addLast(6);
-        nums.addFirst(4);
-        nums.addLast(7);
-//        System.out.println();
-//        System.out.println(nums);
+
+        ArrayDeque<Integer> q = new ArrayDeque<>();
+        q.push(1);
+        q.push(0);
+        q.push(-1);
+        System.out.println(q);
     }
 }

@@ -1,36 +1,34 @@
 package recursion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by sergei.kostin on 11/8/17.
  */
 public class ParenthesesGenerator {
 
-    public void generate(int open, int close, StringBuilder builder, int size){
+    public List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        generateParenthesis(1, 0, result, n, "(");
+        return result;
+    }
 
-        if(open < close) return;
-
-        if(open == size && close == size){
-            System.out.println(builder.toString());
+    private void generateParenthesis(int open, int close, List<String> result, int n, String temp) {
+        if(open == n && close == n){
+            result.add(temp);
             return;
         }
-        if(open < 3){
-            builder.append("(");
-            generate(open + 1, close, builder, size);
-            builder.setLength(builder.length()-1);
-        }
-        if(close < 3){
-            builder.append(")");
-            generate(open, close+1, builder, size);
-            builder.setLength(builder.length()-1);
-        }
-
-
+        if(open > n || close > open) return;
+        generateParenthesis(open + 1, close, result, n, temp+"(");
+        generateParenthesis(open, close+1, result, n, temp+")");
     }
 
     public static void main(String[] args) {
         ParenthesesGenerator generator = new ParenthesesGenerator();
-        generator.generate(0, 0, new StringBuilder(), 3);
+        List<String> result = generator.generateParenthesis(3);
+        for(String elem :result){
+            System.out.println(elem);
+        }
     }
-
-
 }

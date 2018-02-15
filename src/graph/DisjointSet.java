@@ -27,14 +27,17 @@ public class DisjointSet {
         long data;
         Node parent;
         int rank;
+
+        Node(long data){
+            this.data =data;
+        }
     }
 
     /**
      * Create a set with only one element.
      */
     public void makeSet(long data) {
-        Node node = new Node();
-        node.data = data;
+        Node node = new Node(data);
         node.parent = node;
         node.rank = 0;
         map.put(data, node);
