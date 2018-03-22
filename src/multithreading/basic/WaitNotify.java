@@ -5,20 +5,37 @@ package multithreading.basic;
  */
 public class WaitNotify {
 
-    public synchronized void produce(){
-        System.out.println("Starting produce");
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    private Object lock = new Object();
+
+    public void doWait() {
+        synchronized (lock){
+            System.out.println("First thread got the lock");
+            System.out.println("First wait()");
+            try {
+                lock.wait();
+                System.out.println("First thread is back");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println("Finish produce");
     }
 
-    public synchronized void consume(){
-        System.out.println("Starting consume");
-        notify();
-        System.out.println("Finish consume");
+    public void doNotify(){
+        synchronized (lock){
+            System.out.println("Second Thread got the lock");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+           lock.notify();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Second Thread released the lock");
+        }
     }
 
 
@@ -30,18 +47,22 @@ public class WaitNotify {
         Thread t1 = new Thread(){
             @Override
             public void run() {
-                wn.produce();
+                wn.doWait();
             }
         };
-
         Thread t2 = new Thread(){
             @Override
             public void run() {
-                wn.consume();
+                wn.doNotify();
             }
         };
 
         t1.start();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         t2.start();
 
         try {

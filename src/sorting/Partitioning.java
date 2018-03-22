@@ -49,9 +49,7 @@ public class Partitioning {
         int pivot = part.partition( arr, 0, arr.length - 1 );
         System.out.println(pivot);
         ArrayHelper.printArrayWithIndexes(arr);
-//        pivot = part.partition( arr, 0, 7 );
-//        System.out.println(pivot);
-//        ArrayHelper.printArrayWithIndexes(arr);
+
     }
 
 }

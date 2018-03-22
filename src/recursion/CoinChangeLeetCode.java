@@ -96,7 +96,6 @@ public class CoinChangeLeetCode {
         int[] coins = {2};
         CoinChangeLeetCode ch = new CoinChangeLeetCode();
         int result = ch.coinChange(coins, 3);
-        System.out.println(result); Integer.
 
 
     }
