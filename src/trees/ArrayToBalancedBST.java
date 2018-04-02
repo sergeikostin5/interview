@@ -19,9 +19,27 @@ public class ArrayToBalancedBST {
     public static void main(String[] args) {
         int[] arr = {10,20,30,40,50,60,70};
         ArrayToBalancedBST a = new ArrayToBalancedBST();
-        BinarySearchTree tree = new BinarySearchTree();
-        a.arrayToBst(arr,0, arr.length-1, tree);
-        tree.printInOrder(tree.getRoot());
+        a.arrayToTree(arr);
     }
 
+
+
+
+    public BinarySearchTree.TreeNode arrayToTree(int[] array){
+        BinarySearchTree tree = new BinarySearchTree();
+        arrayToTree(array, tree, 0, array.length - 1);
+        tree.printLevelByLevel(tree.getRoot());
+        return tree.getRoot();
+    }
+
+    private void arrayToTree(int[] array, BinarySearchTree tree, int start, int end){
+        if(start > end) return;
+        int mid = (start + end)/2;
+        tree.insert(mid);
+        arrayToTree(array, tree, mid+1, end);
+        arrayToTree(array, tree, start, mid - 1);
+    }
+
+
 }
+

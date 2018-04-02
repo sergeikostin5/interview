@@ -1,4 +1,4 @@
-package tries;
+package trie;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class Trie {
     private TrieNode root;
 
     public Trie(){
-        root = null;
+        root = new TrieNode();
     }
 
     public void insert(String word){
@@ -75,6 +75,12 @@ public class Trie {
             return current.children.size() == 0;
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        Trie tr = new Trie();
+        tr.insert("hell");
+        System.out.println(tr.search("hello"));
     }
 
 }

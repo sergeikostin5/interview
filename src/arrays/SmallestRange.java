@@ -41,12 +41,12 @@ public class SmallestRange {
         return new int[]{start, start+minRange};
     }
 
-    private static class Wrapper{
+    private static class Wrapper {
         int value;
         int listNum;
         int index;
 
-        Wrapper(int value, int listNum, int index){
+        Wrapper(int value, int listNum, int index) {
             this.value = value;
             this.listNum = listNum;
             this.index = index;
@@ -78,5 +78,4 @@ public class SmallestRange {
         int[] arr = sr.smallestRange(temp);
         System.out.println(Arrays.toString(arr));
     }
-
 }

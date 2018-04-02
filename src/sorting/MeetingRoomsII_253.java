@@ -2,7 +2,11 @@ package sorting;
 
 import java.util.Arrays;
 import java.util.Comparator;
-public class MeetingRoomsII {
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+// https://leetcode.com/problems/meeting-rooms-ii/description/
+public class MeetingRoomsII_253 {
 
       private static class Interval {
           int start;
@@ -21,27 +25,23 @@ public class MeetingRoomsII {
 
 
     public int minMeetingRooms(Interval[] intervals) {
-        if(intervals == null || intervals.length == 0) return 0;
-
-
         Arrays.sort(intervals, new Comparator<Interval>(){
             @Override
             public int compare(Interval o1, Interval o2){
                 return o1.start - o2.start;
             }
-        } );
+        });
+        Queue<Integer> minHeap = new PriorityQueue<>();
 
-        int result = intervals.length;
-        int currentEnd = intervals[0].end;
-        for(int i = 0; i < intervals.length - 1; i++){
-            if(intervals[i+1].start <= currentEnd ){
-                result--;
+        for(Interval i : intervals){
+            if(minHeap.isEmpty() || i.start < minHeap.peek()){
+                minHeap.add(i.end);
+            }else{
+                minHeap.poll();
+                minHeap.add(i.end);
             }
-            currentEnd = Math.max(currentEnd, intervals[i+1].end);
         }
-
-        return result;
-
+        return minHeap.size();
     }
 
     public static void main(String[] args) {

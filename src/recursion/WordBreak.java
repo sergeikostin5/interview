@@ -54,6 +54,10 @@ public class WordBreak {
         dict.add("d");
 
         System.out.println(wb.wordBreak("leetcod", dict));
+
+        System.out.println((char)(4+'0'));
+
+
     }
 
 }

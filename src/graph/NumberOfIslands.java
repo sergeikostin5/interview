@@ -31,9 +31,6 @@ public class NumberOfIslands {
             count++;
         }
 
-        public Point findSet(Point point){
-            return findSet(map.get(point)).data;
-        }
 
         private Node findSet(Node node){
             Node parent = node.parent;

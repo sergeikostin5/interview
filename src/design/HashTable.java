@@ -1,4 +1,4 @@
-package hash;
+package design;
 
 import java.util.LinkedList;
 
