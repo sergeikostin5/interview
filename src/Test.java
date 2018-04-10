@@ -11,15 +11,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Test {
 
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        stack.add("four");
-        stack.add("three");
-        stack.add("two");
-        LinkedList<String> list = new LinkedList<>();
-        while(!stack.isEmpty()){
-            list.add(stack.pop());
-        }
 
+        List<String> list = new ArrayList<>();
+        list.add("zero");
+        list.add("One");
+        list.add("Two");
+        list.add("Three");
+        list.add("Four");
+        list.add("Five");
+        list.add("six");
+
+        list.add(2, "inserted");
         System.out.println(list);
     }
 }
