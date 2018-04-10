@@ -2,9 +2,13 @@ package strings;
 
 import java.util.HashMap;
 
-/**
- * https://leetcode.com/problems/minimum-window-substring/discuss/26810/Java-solution.-using-two-pointers-+-HashMap
- **/
+//Generally, there are following steps:
+//
+//        1. create a hashmap for each character in t and count their frequency in t as the value of hashmap.
+//        2. Find the first window in S that contains T. But how? there the author uses the count.
+//        3. Checking from the leftmost index of the window and to see if it belongs to t. The reason we do so is that we want to shrink the size of the window.
+//          3.1 If the character at leftmost index does not belong to t, we can directly remove this leftmost value and update our window(its minLeft and minLen value)
+//          3.2 If the character indeed exists in t, we still remove it, but in the next step, we will increase the right pointer and expect the removed character. If find so, repeat step 3.
 public class MinWindowSubstring {
 
     public String minWindow(String s, String t) {
@@ -137,7 +141,7 @@ public class MinWindowSubstring {
     public static void main(String[] args) {
 
         MinWindowSubstring mw = new MinWindowSubstring();
-        System.out.println(findSubString("ADOBECODEBANC", "ABC"));
+        System.out.println(mw.minWindow("ADOBECODEBANC", "ABC"));
 
     }
 

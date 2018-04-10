@@ -11,24 +11,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Test {
 
     public static void main(String[] args) {
+        Stack<String> stack = new Stack<>();
+        stack.add("four");
+        stack.add("three");
+        stack.add("two");
+        LinkedList<String> list = new LinkedList<>();
+        while(!stack.isEmpty()){
+            list.add(stack.pop());
+        }
 
-        String h = "hello";
-
-        char[] arr = new char[h.length()];
-        arr[0] = 'h';
-        arr[1] = 'e';
-        arr[2] = 'l';
-        arr[3] = 'l';
-        arr[4] = 'o';
-
-        String s = new String(arr);
-        AtomicInteger at = new AtomicInteger();
-        System.out.println(at.get() == 0);
-
+        System.out.println(list);
     }
-
-
-
-
-
 }
